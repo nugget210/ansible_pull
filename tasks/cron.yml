@@ -1,0 +1,7 @@
+- name: install cron job (ansible-pull)
+  cron:
+    user: ansible
+    name: "ansible provision"
+    minute: "*/10"
+    # -o makes sure this only runs when there's a change in repo
+    job: "/usr/bin/ansible-pull -o -U https://github.com/nugget210/ansible_pull.git > /dev/null"
