@@ -3,6 +3,8 @@
   become: true
 
   tasks:
-  - name: Install htop
+  - name: Install packages
     package: 
-      name: htop
+      name: 
+        - htop
+        - git 
