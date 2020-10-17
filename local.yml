@@ -1,10 +1,30 @@
+---
+
 - hosts: localhost
   connection: local
   become: true
 
-  tasks:
-  - name: Install packages
-    package: 
-      name: 
-        - htop
-        - git 
+  pre_tasks:
+  - name: update repo cache (CentOS)
+    tags: always
+    dnf: 
+      update_cache: yes
+      upgrade: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: update repo cache (Ubuntu and Debian)
+    tags: always
+    apt: 
+      update_cache: yes
+      upgrade: dist
+    changed_when: true
+    when: ansible_distribution == "Ubuntu" or "Debian"
+
+  - name: update repo cache (Archlinux)
+    tags: always
+    pacman: 
+      update_cache: yes
+      upgrade: yes
+    changed_when: false
+    when: ansible_distribution == "Archlinux"
