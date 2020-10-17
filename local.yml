@@ -9,7 +9,6 @@
     tags: always
     dnf: 
       update_cache: yes
-      upgrade: yes
     changed_when: false
     when: ansible_distribution == "CentOS"
 
@@ -17,14 +16,15 @@
     tags: always
     apt: 
       update_cache: yes
-      upgrade: dist
-    changed_when: true
+    changed_when: false
     when: ansible_distribution == "Ubuntu" or "Debian"
 
   - name: update repo cache (Archlinux)
     tags: always
     pacman: 
       update_cache: yes
-      upgrade: yes
     changed_when: false
     when: ansible_distribution == "Archlinux"
+
+  tasks:
+    - include: tasks/packages.yml
