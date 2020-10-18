@@ -26,6 +26,14 @@
     changed_when: false
     when: ansible_distribution == "Archlinux"
 
+  - name: start and enable ssh service
+    tags: ssh
+    service: 
+      name: "ssh"
+      state: started
+      enabled: yes
+
+
   tasks:
     - include: tasks/users.yml
 #    - include: tasks/cron.yml
