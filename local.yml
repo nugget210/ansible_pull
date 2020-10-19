@@ -29,7 +29,7 @@
   - name: start and enable ssh service
     tags: ssh
     service: 
-      name: "ssh"
+      name: "sshd"
       state: started
       enabled: yes
 
